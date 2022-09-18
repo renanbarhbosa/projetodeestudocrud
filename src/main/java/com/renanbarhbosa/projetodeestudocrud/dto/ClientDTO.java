@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.Instant;
 
 public class ClientDTO implements Serializable {
-    private final static long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     private Long id;
     private String name;
