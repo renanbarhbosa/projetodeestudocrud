@@ -1,9 +1,7 @@
 package com.renanbarhbosa.projetodeestudocrud.resources;
 
 import com.renanbarhbosa.projetodeestudocrud.dto.ClientDTO;
-import com.renanbarhbosa.projetodeestudocrud.entities.Client;
 import com.renanbarhbosa.projetodeestudocrud.services.ClientService;
-import com.renanbarhbosa.projetodeestudocrud.services.exceptions.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping(value = "/clients")
@@ -26,7 +22,7 @@ public class ClientResource {
     @GetMapping
     public ResponseEntity<Page<ClientDTO>> findAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
-            @RequestParam(value = "linesPerPage", defaultValue = "9") Integer linesPerPage,
+            @RequestParam(value = "linesPerPage", defaultValue = "5") Integer linesPerPage,
             @RequestParam(value = "direction", defaultValue = "ASC") String direction,
             @RequestParam(value = "orderBy", defaultValue = "name") String orderBy
     ) {
@@ -56,12 +52,9 @@ public class ClientResource {
         return ResponseEntity.ok().body(dto);
     }
 
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-
 }
