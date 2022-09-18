@@ -1,11 +1,14 @@
 package com.renanbarhbosa.projetodeestudocrud.entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.Instant;
+import java.util.Objects;
 
 @Entity
 @Table(name = "tb_client")
-public class Client {
+public class Client implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +16,7 @@ public class Client {
     private String name;
     private String cpf;
     private Double income;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant birthDate;
     private Integer children;
 
@@ -74,5 +78,20 @@ public class Client {
 
     public void setChildren(Integer children) {
         this.children = children;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return getId().equals(client.getId()) && getName().equals(client.getName()) &&
+                getCpf().equals(client.getCpf()) && getIncome().equals(client.getIncome())
+                && getBirthDate().equals(client.getBirthDate()) && getChildren().equals(client.getChildren());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getCpf(), getIncome(), getBirthDate(), getChildren());
     }
 }

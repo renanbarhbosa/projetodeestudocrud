@@ -2,14 +2,18 @@ package com.renanbarhbosa.projetodeestudocrud.dto;
 
 import com.renanbarhbosa.projetodeestudocrud.entities.Client;
 
+import javax.persistence.Column;
+import java.io.Serializable;
 import java.time.Instant;
 
-public class ClientDTO {
+public class ClientDTO implements Serializable {
+    private final static long serialVersionUID = 1L;
 
     private Long id;
     private String name;
     private String cpf;
     private Double income;
+    @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private Instant birthDate;
     private Integer children;
 
